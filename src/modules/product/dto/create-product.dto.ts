@@ -1,4 +1,4 @@
-import { StatusProduct } from './../entities/product.entity';
+import { StatusProduct } from '../product.entity';
 import {
   IsEnum,
   IsInt,
