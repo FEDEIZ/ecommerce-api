@@ -1,4 +1,4 @@
-import { IEntity } from 'src/utils/IEntity.interface';
+import { IEntity } from 'src/utils/IEntity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('products')
