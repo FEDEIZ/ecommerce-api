@@ -1,8 +1,8 @@
 import { IEntity } from 'src/utils/IEntity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('products')
-export default class Product extends IEntity {
+export class Product extends IEntity {
   @Column()
   name: string;
 
