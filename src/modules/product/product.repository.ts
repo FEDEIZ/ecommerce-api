@@ -1,4 +1,4 @@
-import { CustomRepository } from 'src/ecommerce_api_nestjs_DB/typeorm-ex.decorator';
+import { CustomRepository } from 'src/config/typeorm-ex.decorator';
 import { Repository } from 'typeorm';
 import { Product } from './product.entity';
 
