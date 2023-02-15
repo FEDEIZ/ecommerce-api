@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './product.entity';
@@ -28,7 +29,8 @@ export class ProductsService {
     return await this.repository.update(uuid, updateProductDto);
   }
 
-  async remove(uuid: string) {
-    return 'this action delete a product'; //await this.repository.delete({ id: uuid });
+  async remove(uuid: string): Promise<DeleteResult> {
+    return await this.repository.delete(uuid);
+    //return 'this action delete a product'; //await this.repository.delete({ id: uuid });
   }
 }
