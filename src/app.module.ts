@@ -5,12 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { typeOrmConfigAsync } from './config/typeorm.config';
 import { ProductsModule } from './modules/product/product.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ProductsModule,
     TypeOrmModule.forRootAsync(typeOrmConfigAsync),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
