@@ -19,17 +19,6 @@ export class Product extends IEntity {
   stock: number;
 }
 
-// export class Product {
-//   constructor(
-//     public uuid: UUIDVersion,
-//     public name: string,
-//     public price: number,
-//     public description: string,
-//     public status: StatusProduct,
-//     public stock: number,
-//   ) {}
-// }
-
 export enum StatusProduct {
   Available = 'available',
   Unavailable = 'unavailable',

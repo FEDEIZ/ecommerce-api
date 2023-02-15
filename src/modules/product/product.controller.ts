@@ -7,14 +7,11 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
-  UsePipes,
-  ValidationPipe,
   HttpCode,
 } from '@nestjs/common';
 import { ProductsService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { UUIDVersion } from 'class-validator';
 
 @Controller('products')
 export class ProductsController {
