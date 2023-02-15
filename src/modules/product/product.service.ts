@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './product.entity';
 import { ProductRepository } from './product.repository';
 
 @Injectable()
@@ -9,32 +10,25 @@ export class ProductsService {
   constructor(
     @InjectRepository(ProductRepository) private repository: ProductRepository,
   ) {}
-  async create(createProductDto: CreateProductDto) {
+  async create(
+    createProductDto: CreateProductDto,
+  ): Promise<Product | undefined> {
     return await this.repository.save(createProductDto);
   }
 
-  findAll() {
-    try {
-    } catch {}
-    return `This action returns all products`;
+  async findAll(): Promise<Product[] | undefined> {
+    return await this.repository.find();
   }
 
-  findOne(uuid: string) {
-    try {
-    } catch {}
-    return `This action returns a #${uuid} product`;
+  async findOne(uuid: string): Promise<Product | undefined> {
+    return await this.repository.findOneBy({ id: uuid });
   }
 
-  update(uuid: string, updateProductDto: UpdateProductDto) {
-    try {
-      console.log(updateProductDto);
-    } catch {}
-    return `This action updates a #${uuid} product`;
+  async update(uuid: string, updateProductDto: UpdateProductDto) {
+    return await this.repository.update(uuid, updateProductDto);
   }
 
-  remove(uuid: string) {
-    try {
-    } catch {}
-    return `This action removes a #${uuid} product`;
+  async remove(uuid: string) {
+    return 'this action delete a product'; //await this.repository.delete({ id: uuid });
   }
 }
