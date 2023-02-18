@@ -2,6 +2,8 @@ import {
   IsDateString,
   IsEmail,
   IsEnum,
+  IsNotEmpty,
+  IsOptional,
   IsString,
   IsUrl,
   MinLength,
@@ -24,6 +26,7 @@ export class CreateUserDto {
   email: string;
 
   @IsUrl() // later to a specific validator to check for real url image
+  @IsOptional()
   profile_picture: string;
 
   @IsEnum(RoleEnum)
