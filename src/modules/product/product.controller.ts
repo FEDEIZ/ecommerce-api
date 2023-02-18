@@ -9,13 +9,13 @@ import {
   ParseUUIDPipe,
   HttpCode,
 } from '@nestjs/common';
-import { ProductsService } from './product.service';
+import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
-@Controller('products')
+@Controller('product')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductService) {}
 
   @Post()
   @HttpCode(200)
@@ -30,7 +30,6 @@ export class ProductsController {
 
   @Get(':uuid')
   findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
-    console.log(uuid);
     return this.productsService.findOne(uuid);
   }
 
