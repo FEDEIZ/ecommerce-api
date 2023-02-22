@@ -1,5 +1,6 @@
 import { IEntity } from 'src/utils/IEntity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Entity('products')
 export class Product extends IEntity {
@@ -17,6 +18,9 @@ export class Product extends IEntity {
 
   @Column()
   stock: number;
+
+  @ManyToOne(() => User, (user) => user.products)
+  user: User;
 }
 
 export enum StatusProduct {

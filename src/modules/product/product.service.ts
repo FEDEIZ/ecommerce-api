@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, UpdateResult } from 'typeorm';
+import { HttpCode, HttpException, Injectable } from '@nestjs/common';
+import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, EntityManager, UpdateResult } from 'typeorm';
+import { User } from '../user/user.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './product.entity';
@@ -10,11 +11,24 @@ import { ProductRepository } from './product.repository';
 export class ProductService {
   constructor(
     @InjectRepository(ProductRepository) private repository: ProductRepository,
+    @InjectEntityManager() private readonly entityManager: EntityManager,
   ) {}
   async create(
     createProductDto: CreateProductDto,
-  ): Promise<Product | undefined> {
-    return await this.repository.save(createProductDto);
+  ): Promise<Product | HttpException> {
+    try {
+      const user = await this.entityManager.findOneBy(User, {
+        id: createProductDto.userId,
+      });
+      if (!user)
+        throw new Error(
+          `Cannot find a user with ${createProductDto.userId} id`,
+        );
+      const product = { ...createProductDto, user: user };
+      return await this.repository.save(product);
+    } catch (error) {
+      return new HttpException(error.statusCode, error.message);
+    }
   }
 
   async findAll(): Promise<Product[] | undefined> {

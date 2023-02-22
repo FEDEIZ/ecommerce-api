@@ -18,7 +18,6 @@ export class ProductsController {
   constructor(private readonly productsService: ProductService) {}
 
   @Post()
-  @HttpCode(200)
   async create(@Body() createProductDto: CreateProductDto) {
     return await this.productsService.create(createProductDto);
   }

@@ -2,6 +2,7 @@ import { StatusProduct } from '../product.entity';
 import {
   IsEnum,
   IsInt,
+  IsNotEmpty,
   IsPositive,
   IsString,
   MaxLength,
@@ -27,4 +28,7 @@ export class CreateProductDto {
   @IsPositive()
   @IsInt()
   stock: number;
+
+  @IsNotEmpty()
+  userId: string;
 }
