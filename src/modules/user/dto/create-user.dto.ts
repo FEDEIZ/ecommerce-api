@@ -2,13 +2,12 @@ import {
   IsDateString,
   IsEmail,
   IsEnum,
-  IsNotEmpty,
   IsOptional,
   IsString,
   IsUrl,
   MinLength,
 } from 'class-validator';
-import { RoleEnum } from '../entities/user.entity';
+import { RoleEnum } from '../user.entity';
 
 export class CreateUserDto {
   @IsString()
