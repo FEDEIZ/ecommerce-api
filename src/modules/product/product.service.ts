@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './product.entity';
@@ -25,7 +25,10 @@ export class ProductService {
     return await this.repository.findOneBy({ id: uuid });
   }
 
-  async update(uuid: string, updateProductDto: UpdateProductDto) {
+  async update(
+    uuid: string,
+    updateProductDto: UpdateProductDto,
+  ): Promise<UpdateResult> {
     return await this.repository.update(uuid, updateProductDto);
   }
 
