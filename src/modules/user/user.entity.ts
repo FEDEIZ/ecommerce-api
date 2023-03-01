@@ -11,23 +11,20 @@ export class User extends IEntity {
   @Column()
   last_name: string;
 
-  @Column()
-  birth_date: string;
+  // @Column()
+  // birth_date: string;
 
   @Column({ unique: true })
-  //@Unique(['email'])
   email: string;
+
+  @Column()
+  password: string;
 
   @Column({ nullable: true })
   profile_picture: string;
 
-  // @Column()
-  // role: RoleEnum;
-
   @OneToMany(() => Product, (product) => product.user)
   products: Product[];
-  //   @Column()
-  //   phone_number: number
 }
 
 export enum RoleEnum {

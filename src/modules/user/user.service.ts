@@ -16,9 +16,9 @@ export class UserService {
     registerUserRequestDto: RegisterUserRequestDto,
   ): Promise<User | HttpException | RegisterUserRequestDto> {
     try {
-      //return await this.repository.save(createUserDto);
+      return await this.repository.save(registerUserRequestDto);
 
-      return registerUserRequestDto;
+      //return registerUserRequestDto;
     } catch (error) {
       return new HttpException(error.statusCode, error.message);
     }
