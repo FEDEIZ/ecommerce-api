@@ -13,12 +13,15 @@ export class UserService {
   ) {}
 
   async doUserRegistration(
-    registerUserRequestDto: RegisterUserRequestDto,
+    registerUser: RegisterUserRequestDto,
   ): Promise<User | HttpException | RegisterUserRequestDto> {
     try {
-      return await this.repository.save(registerUserRequestDto);
-
-      //return registerUserRequestDto;
+      const user = new User();
+      user.first_name = registerUser.first_name;
+      user.last_name = registerUser.last_name;
+      user.email = registerUser.email;
+      user.password = registerUser.password;
+      return await this.repository.save(user);
     } catch (error) {
       return new HttpException(error.statusCode, error.message);
     }
