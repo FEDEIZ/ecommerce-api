@@ -1,8 +1,8 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { RegisterUserRequestDto } from './dto/register-user.req.dto';
+//import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
@@ -12,9 +12,13 @@ export class UserService {
     @InjectRepository(UserRepository) private repository: UserRepository,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User | HttpException> {
+  async doUserRegistration(
+    registerUserRequestDto: RegisterUserRequestDto,
+  ): Promise<User | HttpException | RegisterUserRequestDto> {
     try {
-      return await this.repository.save(createUserDto);
+      //return await this.repository.save(createUserDto);
+
+      return registerUserRequestDto;
     } catch (error) {
       return new HttpException(error.statusCode, error.message);
     }
@@ -28,12 +32,12 @@ export class UserService {
     return await this.repository.findOneBy({ id: uuid });
   }
 
-  async update(
-    uuid: string,
-    updateUserDto: UpdateUserDto,
-  ): Promise<UpdateResult> {
-    return await this.repository.update(uuid, updateUserDto);
-  }
+  // async update(
+  //   uuid: string,
+  //   updateUserDto: UpdateUserDto,
+  // ): Promise<UpdateResult> {
+  //   return await this.repository.update(uuid, updateUserDto);
+  // }
 
   async remove(uuid: string): Promise<DeleteResult> {
     return await this.repository.delete(uuid);

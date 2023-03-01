@@ -14,15 +14,15 @@ export class User extends IEntity {
   @Column()
   birth_date: string;
 
-  @Column()
-  @Unique(['email'])
+  @Column({ unique: true })
+  //@Unique(['email'])
   email: string;
 
   @Column({ nullable: true })
   profile_picture: string;
 
-  @Column()
-  role: RoleEnum;
+  // @Column()
+  // role: RoleEnum;
 
   @OneToMany(() => Product, (product) => product.user)
   products: Product[];
