@@ -35,12 +35,9 @@ export class UserService {
     return await this.repository.findOneBy({ id: uuid });
   }
 
-  // async update(
-  //   uuid: string,
-  //   updateUserDto: UpdateUserDto,
-  // ): Promise<UpdateResult> {
-  //   return await this.repository.update(uuid, updateUserDto);
-  // }
+  async findOneByEmail(username: string): Promise<User | undefined> {
+    return await this.repository.findOneBy({ email: username });
+  }
 
   async remove(uuid: string): Promise<DeleteResult> {
     return await this.repository.delete(uuid);
