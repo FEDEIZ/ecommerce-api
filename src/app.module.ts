@@ -7,6 +7,7 @@ import { typeOrmConfigAsync } from './config/typeorm.config';
 import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { FirebaseService } from './firebase/firebase.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { AuthModule } from './modules/auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, FirebaseService],
 })
 export class AppModule {}

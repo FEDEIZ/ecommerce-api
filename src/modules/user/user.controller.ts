@@ -13,10 +13,17 @@ import { UserService } from './user.service';
 import { RegisterUserRequestDto } from './dto/register-user.req.dto';
 //import { UpdateUserDto } from './dto/update-user.dto';
 import { VALIDATIONS } from 'src/utils/validations.utils';
-
+import { FirebaseService } from 'src/firebase/firebase.service';
+import * as admin from 'firebase-admin';
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  private firebaseApp: admin.app.App;
+  constructor(
+    private readonly userService: UserService,
+    private readonly firebase: FirebaseService,
+  ) {
+    this.firebaseApp = firebase.initFirebase();
+  }
 
   @Post()
   async doUserRegistration(
@@ -29,6 +36,12 @@ export class UserController {
   @Get()
   async findAll() {
     return await this.userService.findAll();
+    // const db = this.firebaseApp.firestore();
+    // const users = [];
+    // const usersCollection = await db.collection('users').get();
+    // console.log(usersCollection.docs[0].data());
+    // usersCollection.docs.forEach((doc) => users.push(doc.data()));
+    // return users;
   }
 
   @Get(':uuid')
